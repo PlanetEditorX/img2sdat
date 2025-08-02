@@ -18,7 +18,7 @@ import copy
 import errno
 import getopt
 import getpass
-import imp
+import importlib
 import os
 import platform
 import re
@@ -1120,15 +1120,18 @@ class DeviceSpecificParams(object):
         return
       try:
         if os.path.isdir(path):
-          info = imp.find_module("releasetools", [path])
+          info = importlib.util.find_spec("releasetools", [path])
         else:
           d, f = os.path.split(path)
           b, x = os.path.splitext(f)
           if x == ".py":
             f = b
-          info = imp.find_module(f, [d])
+          info = importlib.util.find_spec(f, [d])
         print("loaded device-specific extensions from", path)
-        self.module = imp.load_module("device_specific", *info)
+        # info[1]为文件路径
+        spec = importlib.util.spec_from_file_location("device_specific", info[1])
+        self.module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.module)
       except ImportError:
         print("unable to load device-specific module; assuming none")
 
