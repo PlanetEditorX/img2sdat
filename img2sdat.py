@@ -25,7 +25,7 @@ def main(INPUT_IMAGE, OUTDIR='.', VERSION=None, PREFIX='system'):
         sys.exit(1)
     else:
         print('img2sdat binary - version: %s\n' % __version__)
-        
+
     if not os.path.isdir(OUTDIR):
         os.makedirs(OUTDIR)
 
@@ -37,7 +37,7 @@ def main(INPUT_IMAGE, OUTDIR='.', VERSION=None, PREFIX='system'):
             print('''            1. Android Lollipop 5.0
             2. Android Lollipop 5.1
             3. Android Marshmallow 6.0
-            4. Android Nougat 7.0/7.1/8.0/8.1
+            4. Android Nougat 7.0/7.1/8.0/8.1/9.0
             ''')
             try:
                 input = raw_input
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     INPUT_IMAGE = args.image
-    
+
     if args.outdir:
         OUTDIR = args.outdir
     else:
@@ -90,10 +90,10 @@ if __name__ == '__main__':
         VERSION = int(args.version)
     else:
         VERSION = None
-    
+
     if args.prefix:
         PREFIX = args.prefix
     else:
         PREFIX = 'system'
-    
+
     main(INPUT_IMAGE, OUTDIR, VERSION, PREFIX)
