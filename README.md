@@ -1,8 +1,6 @@
 # img2sdat
 Convert filesystem ext4 image (.img) into Android sparse data image (.dat)
 
-
-
 ## Requirements
 This binary requires Python 2.7 or newer installed on your system.
 
@@ -20,14 +18,23 @@ img2sdat.py <system_img> [-o outdir] [-v version] [-p prefix]
 - `[-p prefix]` = name of image (prefix.new.dat)
 
 
+## 步骤
+1. 将system目录转为system.img
 
-## Example
-This is a simple example on a Linux system:
+```bash
+.\make_ext4fs.exe -s -l 2097152000 -a system system.img system
 ```
-~$ ./img2sdat.py system.img -o tmp -v 4
-```
-It will create files `system.new.dat`, `system.patch.dat`, `system.transfer.list` in directory `tmp`.
 
+2. 在`output`生成文件 `system.new.dat`, `system.patch.dat`, `system.transfer.list`
+
+```bash
+python ./img2sdat.py system.img -o output -v 4
+```
+
+3. 将`system.new.dat`压缩为`system.new.dat.br`
+```bash
+.\brotli.exe --quality=6 --output=system.new.dat.br .\output\system.new.dat
+```
 
 
 ## Info
