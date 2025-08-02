@@ -1,7 +1,6 @@
 *.pyc
 .lh/
 *.img
-output/
 system/
 system.new.dat
 system.patch.dat

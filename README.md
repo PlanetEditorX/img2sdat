@@ -28,12 +28,18 @@ img2sdat.py <system_img> [-o outdir] [-v version] [-p prefix]
 2. 在`output`生成文件 `system.new.dat`, `system.patch.dat`, `system.transfer.list`
 
 ```bash
-python ./img2sdat.py system.img -o output -v 4
+python ./img2sdat.py .\output\system.img -o output -v 4
 ```
 
 3. 将`system.new.dat`压缩为`system.new.dat.br`
+- 平衡方案
 ```bash
 .\brotli.exe --quality=6 --output=.\output\system.new.dat.br .\output\system.new.dat
+```
+
+- 更高压缩（发布）
+```bash
+.\brotli.exe --quality=11 --output=.\output\system.new.dat.br .\output\system.new.dat
 ```
 
 
