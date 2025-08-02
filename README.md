@@ -22,7 +22,7 @@ img2sdat.py <system_img> [-o outdir] [-v version] [-p prefix]
 1. 将system目录转为system.img
 
 ```bash
-.\make_ext4fs.exe -s -l 2097152000 -a system system.img system
+.\make_ext4fs.exe -s -l 2097152000 -a system .\output\system.img system
 ```
 
 2. 在`output`生成文件 `system.new.dat`, `system.patch.dat`, `system.transfer.list`
@@ -33,7 +33,7 @@ python ./img2sdat.py system.img -o output -v 4
 
 3. 将`system.new.dat`压缩为`system.new.dat.br`
 ```bash
-.\brotli.exe --quality=6 --output=system.new.dat.br .\output\system.new.dat
+.\brotli.exe --quality=6 --output=.\output\system.new.dat.br .\output\system.new.dat
 ```
 
 
